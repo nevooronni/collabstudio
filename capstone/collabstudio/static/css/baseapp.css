@@ -1,0 +1,13 @@
+#top {
+  background-color: black;
+}
+
+#join {
+  /*position: absolute;
+  top: 0px;
+  right: 40px;*/
+  margin-right: 20%;
+}
+
+#logout {
+}

@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: django-liked
+Version: 1.0.2
+Summary: A django likes app
+Home-page: https://github.com/amyth/django-liked
+Author: Amyth Arora
+Author-email: mail@amythsingh.com
+License: MIT License
+Description: Django Liked is a generic like dislike application that built on django 1.10 using the contenttypes framework to create likesfor any models in your django project
+Platform: UNKNOWN
