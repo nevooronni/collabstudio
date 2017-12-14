@@ -60,3 +60,38 @@ def save_user_profile(sender, instance, **kwargs):
 def photo_url(self):
 	if self.photo and hasattr(self.photo, 'url'):
 		return self.photo.url	
+
+
+class Project(models.Model):
+	post_time = models.DateTimeField(auto_now_add=True)
+	# tags = models.ManyToManyField(Tags, blank=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+	photo = models.ImageField(upload_to = 'photos/',blank=True,default=False)
+	caption = models.TextField(blank=True)
+
+	
+	def __str__(self):
+		return self.user.username
+	class Meta:
+		ordering = ['-post_time']
+	
+	@classmethod
+	def retrieve_profile_projects(cls,profile_id):
+		prof_projects = Project.objects.filter(profile=profile_id).all()
+		return prof_projects
+
+	@classmethod
+	def retrieve_projects(cls):
+		projects = Project.objects.all()
+		return projects
+
+	@classmethod
+	def retrieve_single_project(cls,pk):
+		project = cls.objects.get(pk=pk)
+		return project
+
+	@property
+	def image_url(self):
+		if self.photo and hasattr(self.photo, 'url'):
+			return self.photo.url
