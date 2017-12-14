@@ -59,12 +59,31 @@ def save_user_profile(sender, instance, **kwargs):
 @property 
 def photo_url(self):
 	if self.photo and hasattr(self.photo, 'url'):
-		return self.photo.url	
+		return self.photo.url
+
+class Tags(models.Model):
+	title = models.CharField(max_length=30, unique=True)
+
+	def __str__(self):
+		return self.title
+	class Meta:
+		ordering = ['title']#ordering data everytime can be tedious meta subclass to specify model-specific options 
+
+	def save_tag(self):
+		self.save()
+
+	def delete_tag(self):
+		self.delete()
+
+	@classmethod
+	def retrieve_tags(cls):
+		tags = Tags.objects.all()
+		return tags	
 
 
 class Project(models.Model):
 	post_time = models.DateTimeField(auto_now_add=True)
-	# tags = models.ManyToManyField(Tags, blank=True)
+	tags = models.ManyToManyField(Tags, blank=True)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 	photo = models.ImageField(upload_to = 'photos/',blank=True,default=False)
@@ -96,24 +115,6 @@ class Project(models.Model):
 		if self.photo and hasattr(self.photo, 'url'):
 			return self.photo.url
 
-class Tags(models.Model):
-	title = models.CharField(max_length=30, unique=True)
-
-	def __str__(self):
-		return self.title
-	class Meta:
-		ordering = ['title']#ordering data everytime can be tedious meta subclass to specify model-specific options 
-
-	def save_tag(self):
-		self.save()
-
-	def delete_tag(self):
-		self.delete()
-
-	@classmethod
-	def retrieve_tags(cls):
-		tags = Tags.objects.all()
-		return tags
 
 class Follow(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
