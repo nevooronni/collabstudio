@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile,Tags,Project
 
 class ProfileTestClass(TestCase):
 	'''
@@ -35,7 +35,7 @@ class ProjectTestClass(TestCase):
 		'''
 		set up method
 		'''
-		self.project_one = Post(caption = 'Trap back jumping!')
+		self.project_one = Project(caption = 'Trap back jumping!')
 
 	def test_instance(self):
 		'''
@@ -67,6 +67,50 @@ class ProjectTestClass(TestCase):
 		'''
 		test for retriving post from the db
 		'''
-		all_projects = Project.retrieve_project()
+		all_projects = Project.retrieve_projects()
 		projects = Project.objects.all()
 		self.assertTrue(len(all_projects) == len(projects)) 
+
+
+class TagsTestClass(TestCase):
+	'''
+	test case for Tags class
+	'''
+	def setUp(self):
+		'''
+		set up method
+		'''
+		self.tag_one = Tags(title = 'new')
+
+	def test_instance(self):
+		'''
+		test the method
+		'''
+		self.assertTrue(isinstance(self.tag_one,Tags))
+
+	def test_save_tag(self):
+		'''
+		saves tag to the db
+		'''
+		self.tag_one.save_tag()
+		all_tags = Tags.objects.all()
+		self.assertTrue(len(all_tags) > 0)
+
+
+	def test_delete_tag(self):
+		'''
+		deletes tag from the db
+		'''
+		self.tag_one.save_tag()
+		all_tags = Tags.objects.all()
+		self.tag_one.delete_tag()
+		self.assertTrue(len(all_tags) == 0)
+
+	def test_retrieve_tags(self):
+		'''
+		retrieve all tags from the db
+		'''
+		self.tag_one.save_tag()
+		db_tags = Tags.retrieve_tags()
+		all_tags = Tags.objects.all()
+		self.assertTrue(len(db_tags) == len(all_tags)) 

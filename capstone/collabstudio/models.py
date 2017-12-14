@@ -95,3 +95,22 @@ class Project(models.Model):
 	def image_url(self):
 		if self.photo and hasattr(self.photo, 'url'):
 			return self.photo.url
+
+class Tags(models.Model):
+	title = models.CharField(max_length=30, unique=True)
+
+	def __str__(self):
+		return self.title
+	class Meta:
+		ordering = ['title']#ordering data everytime can be tedious meta subclass to specify model-specific options 
+
+	def save_tag(self):
+		self.save()
+
+	def delete_tag(self):
+		self.delete()
+
+	@classmethod
+	def retrieve_tags(cls):
+		tags = Tags.objects.all()
+		return tags
