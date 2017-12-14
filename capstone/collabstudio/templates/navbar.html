@@ -24,7 +24,7 @@
         </div>
         <!--search form end -->
          <div class="col-sm-6 col-md-6">
-            <li>
+            <li id="signup">
               <a class='btn btn-default' href="/accounts/register">SIGN UP</a>
             </li>
             {% if user.is_authenticated %}
@@ -46,7 +46,7 @@
             </ul>
             {% else %}
             <li>
-              <a class='btn btn-default' href="/accounts/login">LOGIN</a>
+              <a class='btn btn-default' href="/accounts/login" id="login">LOGIN</a>
             </li>
 
             {% endif %}

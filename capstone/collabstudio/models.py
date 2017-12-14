@@ -15,7 +15,7 @@ class Profile(models.Model):
 	website = models.CharField(max_length=30,blank=True)
 	email = models.EmailField()
 	phone_number = PhoneNumberField(max_length=10, blank=True)
-	photo = models.ImageField(upload_to = 'profile/',blank=True,default=False)
+	photo = models.ImageField(upload_to = 'profile/')
 	
 	def __str__(self):
 		return self.user.username

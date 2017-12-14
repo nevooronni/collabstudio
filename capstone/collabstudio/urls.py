@@ -7,6 +7,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns=[
 	url('^$',views.index,name = 'index'),
+	url('^accounts/profile/$',views.profile,name = 'profile'),
+	url('^accounts/profile/update-profile/$',views.update_profile,name = 'update_profile'),
 ]
 
 if settings.DEBUG:
