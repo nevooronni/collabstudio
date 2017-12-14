@@ -127,6 +127,20 @@ class Follow(models.Model):
 		following = Follow.objects.filter(user=user_id).all()
 		return following 
 
+class Comments(models.Model):
+	user = models.ForeignKey(User,on_delete=models.CASCADE)#THE USER
+	project = models.ForeignKey(Project,on_delete=models.CASCADE)#post with the comments
+	comment = models.TextField(blank=True)
+
+	def __str__(self):
+		return self.user.username
+
+	@classmethod
+	def retrieve_project_comments(cls,project_id):
+		project_comments = Comments.objects.filter(project=project_id)
+		return project_comments
+
+
 
 
 

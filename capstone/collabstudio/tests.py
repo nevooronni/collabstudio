@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile,Tags,Project,Follow
+from .models import Profile,Tags,Project,Follow,Comments
 
 class ProfileTestClass(TestCase):
 	'''
@@ -145,10 +145,49 @@ class FollowTestClass(TestCase):
 		self.chelsea.save()
 
 		self.new_profile = Profile(user=self.neville,bio='bla bla blab bla')
-		self.new_post = Post(user=self.neville,caption='bla bla bla bla bla')
+		self.new_project = Project(user=self.neville,caption='bla bla bla bla bla')
 		self.follow = Follow(user=self.neville,profile=self.new_profile)
 		
 		get_following = Follow.retrieve_following(self.neville.id)
 		following = Follow.objects.all()
 
 		self.assertTrue(len(get_following) == len(following))
+
+
+class CommentsTestClass(TestCase):
+	'''
+	test comments class
+	'''
+	def setUp(self):
+		'''
+		setup method
+		'''
+		self.comment = Comments(comment = 'bla bla bla bla bla bla')
+
+	def test_instance(self):
+		'''
+		test to see if the object is an instance of th comment class
+		'''
+		self.assertTrue(isinstance(self.comment, Comments))
+
+	def test_retrieve_project_comments(self):
+		'''
+		test the retrieve+_post_comments methods
+		'''
+		self.neville = User(username = 'nevooronni')
+		self.neville.save()
+
+		self.chelsea = User(username = 'chelsea')
+		self.chelsea.save()
+
+		self.new_profile = Profile(user=self.neville,bio='bla bla blab bla')
+		self.new_post = Project(user=self.neville,caption='bla bla bla bla bla')
+
+		self.comment = Comments(project=self.new_post,comment='bla bla bla')
+
+		get_comments = Comments.retrieve_project_comments(self.new_post.id)
+
+		comments = Comments.objects.all()
+
+		self.assertTrue(len(get_comments) == len(comments))
+
