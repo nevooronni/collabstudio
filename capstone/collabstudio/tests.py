@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile,Tags,Project
+from .models import Profile,Tags,Project,Follow
 
 class ProfileTestClass(TestCase):
 	'''
@@ -114,3 +114,41 @@ class TagsTestClass(TestCase):
 		db_tags = Tags.retrieve_tags()
 		all_tags = Tags.objects.all()
 		self.assertTrue(len(db_tags) == len(all_tags)) 
+
+class FollowTestClass(TestCase):
+	'''
+	test the follow class
+	'''
+	def test_instance(self):
+		'''
+		tests to see if it was instantiated properly
+		'''
+		self.neville = User(username = 'nevooronni')
+		self.neville.save()
+
+		self.chelsea = User(username = 'chelsea')
+		self.chelsea.save()
+
+		self.new_profile = Profile(user=self.neville,bio='bla bla blab bla')
+		self.follow = Follow(user=self.neville,profile=self.new_profile)
+
+		self.assertTrue(isinstance(self.follow, Follow))
+
+	def test_retrieve_following(self):
+		'''
+		test retrieve_following method
+		'''
+		self.neville = User(username = 'nevooronni')
+		self.neville.save()
+
+		self.chelsea = User(username = 'chelsea')
+		self.chelsea.save()
+
+		self.new_profile = Profile(user=self.neville,bio='bla bla blab bla')
+		self.new_post = Post(user=self.neville,caption='bla bla bla bla bla')
+		self.follow = Follow(user=self.neville,profile=self.new_profile)
+		
+		get_following = Follow.retrieve_following(self.neville.id)
+		following = Follow.objects.all()
+
+		self.assertTrue(len(get_following) == len(following))

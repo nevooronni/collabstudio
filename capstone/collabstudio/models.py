@@ -114,3 +114,31 @@ class Tags(models.Model):
 	def retrieve_tags(cls):
 		tags = Tags.objects.all()
 		return tags
+
+class Follow(models.Model):
+	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.user.username
+
+	@classmethod
+	def retrieve_following(cls,user_id):
+		following = Follow.objects.filter(user=user_id).all()
+		return following 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
