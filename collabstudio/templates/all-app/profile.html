@@ -15,7 +15,7 @@
           </div>
           <div class="row line">
             <h4 class="text-center">Bio</h4>
-            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.bio}}</h4><hr>
+            <h4 class="text-center" style="color: #3a94fd;"></h4><hr>
             <h4 class="text-center">Email</h4>
             <h4 class="text-center" style="color: #3a94fd;">{{user.profile.email}}</h4><hr>
             <h4 class="text-center" style="color: #3a94fd;">{{user.profile.phone}}</h4>
@@ -38,7 +38,7 @@
               </div>
               <div class="panel-body" style="height: 215px;">
                 {% for project in projects %}
-                <img src="{{project.photo.url}}" alt="posted photo" class="img-responsive" height="200px" width="300px" style="display: inline;">
+                <img src="{{project.photo.url}}" alt="posted photo" class="img-responsive" height="300px" width="300px" style="display: inline; margin-right: 600px; margin-top: 100px;">
                 <div style="margin-left: 300px; margin-top: -180px;">
                   <h4 class="text-center" style="color: #3a94fd;">Description</h4>
                   <p class="text-center">{{project.description}}</p>
