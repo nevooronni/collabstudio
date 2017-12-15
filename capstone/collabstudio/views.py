@@ -76,6 +76,8 @@ def update_profile(request):
 @login_required(login_url = '/accounts/login/')
 def timeline(request):
 	#profile section 
+	tags = Tags.retrieve_tags()
+
 	try:
 		current_user = request.user
 
@@ -89,21 +91,9 @@ def timeline(request):
 	#follow section 
 	current_user = request.user
 
-	following = Follow.retrieve_following(current_user.id)#get following profiles 
+	projects = Project.retrieve_projects()#get all posts 
 
-	projects = Projects.retrieve_posts()#get all posts 
-
-	following_posts = []#empty array that will be for posts or the profiles you follow
-
-	for follow in following:
-
-		for project in projects:
-
-			if follow.profile == project.profile:
-
-				following_posts.append(project)
-
-	return render(request, 'all-app/timeline.html',{"profiles":profiles,"following":following,"user":current_user,"following_projects":following_projects})
+	return render(request, 'all-app/timeline.html',{"profiles":profiles,"user":current_user,"tags":tags})
 
 @login_required(login_url = '/accounts/login/')
 def project(request):
