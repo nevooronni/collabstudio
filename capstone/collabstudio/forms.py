@@ -11,3 +11,15 @@ class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = Profile
 		fields = ('bio','website','phone_number','email','photo',)
+
+
+class NewProjectForm(forms.ModelForm):
+	class Meta:
+		model = Project
+		fields=('photo','description',)
+
+class ReviewForm(forms.ModelForm):
+	class Meta:
+		model = Comments
+		fields = ('comment',)
+

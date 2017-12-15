@@ -9,7 +9,7 @@ from .models import Project,Profile,Tags,Follow,Comments
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
-from .forms import ProfileForm
+from .forms import ProfileForm,NewProjectForm,ReviewForm
 
 
 	# 	# form = NewsLetterForm(request.POST)
@@ -72,4 +72,61 @@ def update_profile(request):
 		profile_form = ProfileForm(instance=request.user.profile)
 
 	return render(request, 'all-app/update_profile.html',{"profile_form":profile_form,"user":user})
+
+@login_required(login_url = '/accounts/login/')
+def timeline(request):
+	#profile section 
+	try:
+		current_user = request.user
+
+		current_user_profile = current_user.profile
+
+		profiles = Profile.retrieve_other_profiles(current_user.id)
+	
+	except objectDoesNotExist:
+		raise Http404()
+
+	#follow section 
+	current_user = request.user
+
+	following = Follow.retrieve_following(current_user.id)#get following profiles 
+
+	projects = Projects.retrieve_posts()#get all posts 
+
+	following_posts = []#empty array that will be for posts or the profiles you follow
+
+	for follow in following:
+
+		for project in projects:
+
+			if follow.profile == project.profile:
+
+				following_posts.append(project)
+
+	return render(request, 'all-app/timeline.html',{"profiles":profiles,"following":following,"user":current_user,"following_projects":following_projects})
+
+@login_required(login_url = '/accounts/login/')
+def project(request):
+	current_user = request.user
+	current_profile = current_user.profile
+
+	if request.method == 'POST':
+		form = NewProjectForm(request.POST,request.FILES)
+
+		if form.is_valid():
+			project = form.save(commit=False)#commit your post
+			project.user = current_user#post user should be current user
+			project.profile = current_profile#post should be saved to curent_user profile
+			project.save()#save the post 
+
+			return redirect(profile)
+
+		elif review_form.is_valid():
+			print('the review form is working')
+
+	else:
+
+		form = NewProjectForm()
+
+	return render(request, 'all-app/project.html', {"form":form,"current_user":current_user})
 

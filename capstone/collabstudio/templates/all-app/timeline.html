@@ -1,0 +1,24 @@
+{% extends "all-app/base.html" %}
+
+{% block styles %}
+  {{block.super}}
+{% endblock %}
+
+{% block content %}
+  {{bock.super}}
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+      </div>
+      </div>
+    </div>  
+    <div class="nav">
+      <nav class="navbar navbar-inverse navbar-fixed-bottom" id="footer">
+        <div class="navbar-text pull-right">Site built by nevooronni</div>
+      </nav>
+    </div>
+  </div>
+{% endblock %}

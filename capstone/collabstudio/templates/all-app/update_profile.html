@@ -1,17 +1,49 @@
 {% extends 'all-app/base.html' %}
-
+{% load static %}
 {% block content %}
   {{block.super}}
-  <div class="container">
-    <div class="row">
-      <h1>Edit Profile</h1>
+  <div class="row" style="margin-top: 80px;">
+      <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px; padding-left: ;height: 650px;">
+      </div>
+      <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px; padding:  3%; height: 650px;">
+          <div class="row line">
+            <div class="row" style="border-bottom-style: solid; border-bottom-color: #D3D3D3; border-bottom-width: 1px;  margin-bottom: 5%; width: auto;margin-top: -40px;">
+              <h2 class="text-center">Profile</h2>
+            </div>
+            <img src="{% static 'img/me.jpg' %}" height="200px" width="200px" alt="profile pic">
+            <h4 class="text-center" style="color: #456677;">{{user.username}}</h4>
+          </div>
+          <div class="row line">
+            <h4 class="text-center">Bio</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.bio}}</h4><hr>
+            <h4 class="text-center">Email</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.email}}</h4><hr>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.phone}}</h4>
+            <h4 class="text-center">Website</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.phone_number}}</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.website}}</h4><hr>
+          </div>
+      </div>
+      <div class="col-md-6 col-lg-6" style="border-style: solid; border-color: #D3D3D3; border-width: 1px; padding:  3%; height: 650px;">
+          <div class="row" style="border-bottom-style: solid; border-bottom-color: #D3D3D3; border-bottom-width: 1px;  margin-bottom: 5%; width: auto;margin-top: -40px;">
+            <h2>Tracks /Following/ Followers/</h2>
+          </div>
+          <div class="row">
+            <form action="{% url 'update_profile' %}" method="post">
+              {% csrf_token %}
+              {{ user_form.as_p }}
+              {{ profile_form.as_p }}
+              <button type="submit"  class="btn" style="width: 15  0px; background-color: #0060DF; color: #fff;">Save Changes</button>
+            </form>
+          </div>
+      </div>
+      <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px;  /*padding:  10%;*/ height: 650px;">
+      </div>
 
-      <form action="{% url 'update_profile' %}" method="post">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        <button type="submit">Save Changes</button>
-      </form>
+    <div class="nav">
+      <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #000;">
+        <div class="navbar-text pull-right">Site built by nevooronni</div>
+      </nav>
     </div>
   </div>
 

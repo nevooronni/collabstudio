@@ -87,7 +87,8 @@ class Project(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 	photo = models.ImageField(upload_to = 'photos/',blank=True,default=False)
-	caption = models.TextField(blank=True)
+	title = models.TextField(blank=True)
+	description = models.TextField(blank=True)
 
 	
 	def __str__(self):

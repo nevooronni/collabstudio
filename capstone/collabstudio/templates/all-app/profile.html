@@ -1,32 +1,64 @@
 {% extends 'all-app/base.html' %}
+{% load static %}
 
 {% block content %}
-  <div class="container-luid" id="rowdown">
-    <div class="row">
-      <div class="col-md-2 col-lg-2" id="row2">
-          {% if profile %}
-          <div class="">
-            <h3 class="text"><a href="">Profile</a></h3>
-            <img src="{{user.profile.photo.url}}" alt="profile pic" height="180px" width="180px" id="picture">
-            <a href="{% url 'update_profile' %}"><button class="btn">Update Profile</button></a>
-            <h4 class="text-center">{{user.username}}</h4>
-            <p class="text-center">{{user.profile.bio}}</p>
-            <h4 class="text-center">{{user.profile.email}}</h4>
-            <h4 class="text-center">{{user.profile.phone}}</h4>
-            <h4 class="text-center">{{user.profile.phone_number}}</h4>
-            <h4 class="text-center">{{user.profile.website}}</h4>
-          {% endif %}
+    <div class="row" style="margin-top: 70px;">
+      <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px; padding-left: ;height: 650px;">
+      </div>
+      <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px; padding:  3%; height: 650px;">
+          <div class="row line">
+            <div class="row" style="border-bottom-style: solid; border-bottom-color: #D3D3D3; border-bottom-width: 1px;  margin-bottom: 5%; width: auto;margin-top: -40px;">
+            <h2 class="text-center">Profile</h2>
+          </div>
+            <img src="{% static 'img/me.jpg' %}" height="200px" width="200px" alt="profile pic">
+            <h4 class="text-center" style="color: #456677;">{{user.username}}</h4>
+          </div>
+          <div class="row line">
+            <h4 class="text-center">Bio</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.bio}}</h4><hr>
+            <h4 class="text-center">Email</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.email}}</h4><hr>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.phone}}</h4>
+            <h4 class="text-center">Website</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.phone_number}}</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.website}}</h4><hr>
+            <a href="{% url 'update_profile' %}"><button class="btn" style="width: 200px; background-color: #0060DF; color: #fff;">Update Profile</button></a>
           </div>
       </div>
-      <div class="col-md-6 col-lg-6" id="row3">
-        <div class="row">
-          <div class="col-md-12">
+      <div class="col-md-6 col-lg-6" style="border-style: solid; border-color: #D3D3D3; border-width: 1px; padding:  3%; height: 650px;">
+          <div class="row" style="border-bottom-style: solid; border-bottom-color: #D3D3D3; border-bottom-width: 1px;  margin-bottom: 5%; width: auto;margin-top: -40px;">
             <h2>Tracks /Following/ Followers/</h2>
-        </div>
-      </div> 
+          </div>
+          <div class="row">
+            <a href="{% url 'project' %}"><button class="btn" style="width: 200px; background-color: #0060DF; color: #fff; margin-left: 30%;">Create Project</button></a>
+              <div class="panel panel-default" style="margin-top: 10px;">
+              <div class="panel-heading">
+                {% if projects %}
+                  <p>{{projects|length}} projects</p>
+              </div>
+              <div class="panel-body" style="height: 215px;">
+                {% for project in projects %}
+                <img src="{{project.photo.url}}" alt="posted photo" class="img-responsive" height="200px" width="300px" style="display: inline;">
+                <h4>{{project.title}}</h4>
+                <div style="float: left;">
+                  <p>{{project.description}}</p>
+                  {% endfor %}
+                  {% else %}
+                  <h3>You have not posted anything yet</h3>
+                  {% endif %}
+                </div>
+              </div>
+            </div>  
+          </div>
+      </div>
+      <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px;  /*padding:  10%;*/ height: 650px;">
+        {% for tag in tags %}
+          <h5>{{tag.title}}</h5>
+        {% endfor %}  
+      </div>
     </div>
     <div class="nav">
-      <nav class="navbar navbar-inverse navbar-fixed-bottom" id="footer">
+      <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #000;">
         <div class="navbar-text pull-right">Site built by nevooronni</div>
       </nav>
     </div>

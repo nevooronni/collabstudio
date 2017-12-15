@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top  ">
+    <nav class="navbar navbar-fixed-top" style="padding-top: 20px; height: 87px; background-color: #f2f2f2;">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="" id="collabstudio">COLLABSTUDIO</a>
+          <a class="navbar-brand" href="{% url 'index' %}" id="collabstudio" style="color: #456677;">COLLABSTUDIO</a>
+          <a class="navbar-brand" href="" id="collabstudio" style="margin-right: 0px; margin-left: -10px; color: #456677;">Studio</a>
+          <a class="navbar-brand" href="{% url 'timeline' %}" id="collabstudio" style="margin-right: 0px; margin-left: -10px; color: #456677;">Explore</a>
+          <a class="navbar-brand" href="{% url 'profile' %}" id="collabstudio" style="margin-right: 0px; margin-left: -10px; color: #456677;">Profile</a>
         </div>
 
         <!--Adding a search from -->
-        <div class="col-sm-4 navbar-right">
+        <div class="col-sm-4" style="margin-left: -20px;">
           <form class="navbar-form" role="search" action="">
             <div class='input-group'>
               <input type="text" class="form-control" placeholder="Search projects" name="person">
@@ -24,14 +27,14 @@
         </div>
         <!--search form end -->
          <div class="col-sm-6 col-md-6">
-            <li id="signup">
-              <a class='btn btn-default' href="/accounts/register">SIGN UP</a>
-            </li>
+            <p id="signup">
+              <a class='btn btn-default' href="/accounts/register" style="margin-left: 156%; margin-top: -70px; color: #456677; background-color: transparent; width: 90px;">JOIN</a>
+            </p>
             {% if user.is_authenticated %}
-            <ul>
+            <ul style="position: absolute; top: -40px; right: -585px; background-color: transparent;">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
+                <ul class="dropdown-menu" role="menu" stl>
                   <li>
                     <a href="">Home</a>
                   </li>
@@ -39,15 +42,15 @@
                     <a href="/accounts/password/change">Change Password</a>
                   </li>
                   <li>
-                    <a href="/logout">LOGOUT</a>
+                    <a href="/logout" id="logout">LOGOUT</a>
                   </li>
                 </ul>
               </li>
             </ul>
             {% else %}
-            <li>
-              <a class='btn btn-default' href="/accounts/login" id="login">LOGIN</a>
-            </li>
+            <p>
+              <a class='btn btn-default' href="/accounts/login" style="margin-left: 170%; margin-top: -130px; color: #456677; background-color: transparent; width: 100px;">LOGIN</a>
+            </p>
 
             {% endif %}
           </div>

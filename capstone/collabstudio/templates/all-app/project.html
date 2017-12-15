@@ -1,0 +1,50 @@
+{% extends 'all-app/base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <div class="row" style="margin-top: 70px;">
+      <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px; padding-left: ;height: 650px;">
+      </div>
+      <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px; padding:  3%; height: 650px;">
+          <div class="row line">
+            <div class="row" style="border-bottom-style: solid; border-bottom-color: #D3D3D3; border-bottom-width: 1px;  margin-bottom: 5%; width: auto;margin-top: -40px;">
+            <h2 class="text-center">Profile</h2>
+          </div>
+            <img src="{% static 'img/me.jpg' %}" height="200px" width="200px" alt="profile pic">
+            <h4 class="text-center" style="color: #456677;">{{user.username}}</h4>
+          </div>
+          <div class="row line">
+            <h4 class="text-center">Bio</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.bio}}</h4><hr>
+            <h4 class="text-center">Email</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.email}}</h4><hr>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.phone}}</h4>
+            <h4 class="text-center">Website</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.phone_number}}</h4>
+            <h4 class="text-center" style="color: #3a94fd;">{{user.profile.website}}</h4><hr>
+            <a href="{% url 'update_profile' %}"><button class="btn" style="width: 200px; background-color: #0060DF; color: #fff;">Update Profile</button></a>
+          </div>
+      </div>
+      <div class="col-md-6 col-lg-6" style="border-style: solid; border-color: #D3D3D3; border-width: 1px; padding:  3%; height: 650px;">
+          <div class="row" style="border-bottom-style: solid; border-bottom-color: #D3D3D3; border-bottom-width: 1px;  margin-bottom: 5%; width: auto;margin-top: -40px;">
+            <h2>Post Project</h2>
+          </div>
+          <div class="row">
+            <form action="{% url 'project' %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              <input class="btn" type="submit" value="Submit" value="post" style="width: 200px; background-color: #0060DF; color: #fff;"/>
+            </form>
+          </div>
+      </div>
+      <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px;  /*padding:  10%;*/ height: 650px;">
+      </div>
+    </div>
+    <div class="nav">
+      <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #000;">
+        <div class="navbar-text pull-right">Site built by nevooronni</div>
+      </nav>
+    </div>
+  </div>
+{% endblock %}
