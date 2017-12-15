@@ -39,9 +39,9 @@
               <div class="panel-body" style="height: 215px;">
                 {% for project in projects %}
                 <img src="{{project.photo.url}}" alt="posted photo" class="img-responsive" height="200px" width="300px" style="display: inline;">
-                <h4>{{project.title}}</h4>
-                <div style="float: left;">
-                  <p>{{project.description}}</p>
+                <div style="margin-left: 300px; margin-top: -180px;">
+                  <h4 class="text-center" style="color: #3a94fd;">Description</h4>
+                  <p class="text-center">{{project.description}}</p>
                   {% endfor %}
                   {% else %}
                   <h3>You have not posted anything yet</h3>
@@ -52,9 +52,15 @@
           </div>
       </div>
       <div class="col-md-2 col-lg-2" style="border-style: solid; border-color: #D3D3D3; border-width: 1px;  /*padding:  10%;*/ height: 650px;">
-        {% for tag in tags %}
-          <h5>{{tag.title}}</h5>
-        {% endfor %}  
+        <div class="row" style="border-bottom-style: solid; border-bottom-color: #D3D3D3; border-bottom-width: 1px;  margin-bottom: 5%; width: auto; margin-top: 8px;">
+            <h2 class="text-center">Tags</h2>
+        </div>
+        <div style="margin-top: 50px; ">
+          
+          {% for tag in tags %}
+            <button class="btn" style="display: block; margin-bottom: 10px;">{{tag.title}}</button>
+          {% endfor %}
+        </div>  
       </div>
     </div>
     <div class="nav">
